@@ -47,7 +47,7 @@ group :development do
   gem 'rails-erd', '~> 1.6'
   gem 'railroady', '~> 1.5', '>= 1.5.3'
   gem 'guard', '~> 2.16', '>= 2.16.2'
-  gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
 end
 
 group :test do
