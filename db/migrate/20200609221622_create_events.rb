@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration[6.0]
     create_table :events do |t|
       t.datetime :date
       t.string :location
-      t.references :user, null: false, foreign_key: true
+      t.references :host, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end
