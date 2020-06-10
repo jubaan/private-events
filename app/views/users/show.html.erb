@@ -1,4 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+
+    <% current_user.events.each do |event| %>
+      <div>
+      <%= event.location %>
+      <%= event.date %>
+      <%= event.host.username %>
+      <br>
+      <%= link_to 'Show', event %>
+      <% if event.host == current_user %>
+      <%= link_to 'Edit', edit_event_path(event) %>
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+      </div>
+    <% end %>
+
+
+<%= link_to 'Edit profile', edit_user_path(@user) %> |
+<%= link_to 'Back to events', root_path %>
