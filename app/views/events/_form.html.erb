@@ -12,7 +12,7 @@
 
   <div class="field">
     <%= f.label :date %><br />
-    <%= select_date Date.today, prefix: :start_date %>
+    <%= f.date_select :date, autocomplete:"date" %>
   </div>
 
   <div class="field">
