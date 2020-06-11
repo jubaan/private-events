@@ -3,16 +3,26 @@
 <h1>Events</h1>
 
 <div>
-  <%= @event.location %>
-  <%= @event.date %>
-  <p> Hosted by
-    <%= @event.host.username %>
+  <strong> Hosted by
+    <%= link_to @event.host.username, "/users/#{@event.host.id}" %>
+  </strong>
+  <br>
+  <strong>Where?</strong>  <%= @event.location %>
+  <br>
+  <strong>When?</strong> <%= @event.date %>
+  <p>
+    <strong>What?</strong>
+    <br>
+    <%= @event.description %>
   </p>
   <p>
-    <span>Attendees</span>
+    <strong>Who is coming?</strong>
+    <%if @event.attendees.empty? %>
+      <p class="font-italic text-muted">Nobody has confirmed yet</p>
+    <% end %>
     <% @event.attendees.each do |attendee| %>
       <br>
-      <%= attendee.username %>
+      <%= link_to attendee.username, "/users/#{attendee.id}" %>
     <% end %>
   </p>
   <br>
