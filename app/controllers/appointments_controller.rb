@@ -72,7 +72,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      puts params
       params.permit(:attendee_id, :event_id)
     end
 end
