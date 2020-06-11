@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_162148) do
+ActiveRecord::Schema.define(version: 2020_06_11_195049) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "attendee_id", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_06_10_162148) do
     t.integer "host_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "description"
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 

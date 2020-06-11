@@ -7,8 +7,8 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-    @upcoming_events = Event.where('date >=?', Date.today)
-    @past_events = Event.where('date <?', Date.today)
+    @upcoming_events = Event.upcoming
+    @past_events = Event.past
   end
 
   # GET /events/1
@@ -75,6 +75,6 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.fetch(:event, {}).permit(:date, :location)
+    params.fetch(:event, {}).permit(:date, :location, :description)
   end
 end
