@@ -2,21 +2,14 @@
 
 <h1>Events</h1>
 
-    <% @events.each do |event| %>
-      <div>
-      <%= event.location %>
-      <%= event.date %>
-      <%= event.host.username %>
-      <br>
-      <%= link_to 'Show', event %>
-      <% unless event.attendees.include?(current_user) || event.host == current_user %>
-        <%= link_to "I'm going", appointments_path(event: event.id), method: :post, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-      <% if event.host == current_user %>
-        <%= link_to 'Edit', edit_event_path(event) %>
-        <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-      </div>
-    <% end %>
-
 <%= link_to 'New Event', new_event_path %>
+
+<h2>Upcoming Events</h2>
+<% @upcoming_events.each do |event| %>
+  <%= render "event_info", event: event%>
+<% end %>
+
+<h2>Past Events</h2>
+<% @past_events.each do |event| %>
+  <%= render "event_info", event: event%>
+<% end %>
