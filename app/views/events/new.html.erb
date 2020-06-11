@@ -1,5 +1,12 @@
 <h1>New Event</h1>
 
+<%= form_for(@event) do |f| %>
+  <div class="field">
+    <%= f.label :attendees %><br />
+    <%= select_tag "attendees", options_from_collection_for_select(User.all, 'id', 'name') %>
+  </div>
+<% end %>
+
 <%= render 'form', event: @event %>
 
 <%= link_to 'Back', events_path %>
