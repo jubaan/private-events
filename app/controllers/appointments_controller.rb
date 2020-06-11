@@ -24,8 +24,9 @@ class AppointmentsController < ApplicationController
   # POST /appointments
   # POST /appointments.json
   def create
-    n = Event.find(params[:event])
-    @appointment = Appointment.new(attendee_id: current_user.id, event_id: n.id)
+    # n = Event.find(params[:event])
+    # @appointment = Appointment.new(attendee_id: current_user.id, event_id: n.id)
+    @appointment = Appointment.create(appointment_params)
 
     respond_to do |format|
       if @appointment.save
@@ -33,9 +34,10 @@ class AppointmentsController < ApplicationController
         # format.json { render :show, status: :created, location: @appointment }
       else
         format.html { render :new }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
+        format.json { render json: @appointment.errors, status: :unprocessable_entity } end
     end
+
+
   end
 
   # PATCH/PUT /appointments/1
@@ -70,6 +72,7 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.require(:appointment).permit(:event_id)
+      puts params
+      params.permit(:attendee_id, :event_id)
     end
 end
