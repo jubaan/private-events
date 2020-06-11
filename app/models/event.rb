@@ -3,4 +3,5 @@
 class Event < ApplicationRecord
   belongs_to :host, foreign_key: 'host_id', class_name: 'User'
   has_many :appointments, foreign_key: 'event_id'
+  has_many :attendees, through: :appointments
 end

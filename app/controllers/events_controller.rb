@@ -61,6 +61,9 @@ class EventsController < ApplicationController
     end
   end
 
+  def im_going
+    p params[:event]
+  end
   private
 
   # Use callbacks to share common setup or constraints between actions.

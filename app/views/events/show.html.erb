@@ -1,4 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Events</h1>
+
+      <div>
+      <%= @event.location %>
+      <%= @event.date %>
+      <p> Hosted by
+        <%= @event.host.username %>
+      </p>
+      <p>
+        <span>Attendees</span>
+        <% @event.attendees.each do |attendee| %>
+          <br>
+          <%= attendee.username %>
+        <% end %>
+      </p>
+      <br>
+      <% if @event.host == current_user %>
+        <%= link_to 'Edit', edit_event_path(@event) %>
+        <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+      </div>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
