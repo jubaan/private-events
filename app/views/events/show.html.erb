@@ -25,6 +25,25 @@
       <%= link_to attendee.username, "/users/#{attendee.id}" %>
     <% end %>
   </p>
+    <br>
+
+    <strong>Confirmed<strong>
+    <%if @confirmed_appointments %>
+      <p class="font-italic text-muted">Nobody has confirmed yet</p>
+    <% end %>
+    <% @confirmed_appointments.each do |attendee| %>
+      <br>
+      <%= link_to attendee.username, "/users/#{attendee.id}" %>
+    <% end %>
+    <br>
+
+    <strong>Not Confirmed<strong>
+    <% @not_confirmed_appointments.each do |event| %>
+      <%= event.attendees %>
+      <%# <%= link_to attendee.username, "/users/#{attendee.id}" %1> %>
+    <% end %>
+    <br>
+    j
   <br>
   <% if @event.host == current_user %>
     <%= link_to 'Edit', edit_event_path(@event) %> |
