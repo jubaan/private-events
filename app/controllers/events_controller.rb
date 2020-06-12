@@ -15,8 +15,8 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @appointment = Appointment.new
-    @confirmed_appointments = Event.confirmed_appointments
-    @not_confirmed_appointments = Event.not_confirmed_appointments
+    # @confirmed_appointments = Event.confirmed_appointments
+    # @not_confirmed_appointments = Event.not_confirmed_appointments
   end
 
   # GET /events/new
