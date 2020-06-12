@@ -17,32 +17,34 @@
   </p>
   <p>
     <strong>Who is coming?</strong>
-    <br>
-    <% User.all.each do |attendee| %>
-      <% if Appointment.confirmed?(@event, attendee) %>
-        <%= link_to attendee.username, "/users/#{attendee.id}" %>
-      <% end %>
-      <br>
-    <% end %>
 
     <div>
       <strong>Confirmed</strong>
-      <br>
+      <% if Event.appointments_by_status(@event.id, true).empty? %>
+        <div class="text-muted font-italic">Nobody has confirmed yet!</div>
+      <% end %>
       <% Event.appointments_by_status(@event.id, true).each do |appointment| %>
-        <%= appointment %>
+        <div>
+          <%= link_to appointment.attendee.username, '/users/#{attendee.id}' %>
+        </div>
       <% end %>
     </div>
 
     <div>
       <strong>Not Confirmed</strong>
-      <br>
+      <% if Event.appointments_by_status(@event.id, false).empty? %>
+        <div class="text-muted font-italic">Nobody has confirmed yet!</div>
+      <% end %>
       <% Event.appointments_by_status(@event.id, false).each do |appointment| %>
-        <%= appointment.attendee.username %>
+        <div>
+          <%= link_to appointment.attendee.username, '/users/#{attendee.id}' %>
+        </div>
       <% end %>
     </div>
 
     <br>
 
+    <%# TODO: Get rid of this loop %>
     <strong>Invite friends</strong>
     <br>
     <% User.all.each do |attendee| %>
