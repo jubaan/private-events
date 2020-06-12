@@ -11,6 +11,20 @@
   <% end %>
 </div>
 
+<% Event.all.each do |event| %>
+  <% if Appointment.confirmed?(event, @user) %>
+    <%= link_to event.description, "/event/#{event.id}" %>
+  <% end %>
+  <br>
+<% end %>
+
+<% Event.all.each do |event| %>
+  <% if Appointment.confirmed?(event, status = false, @user) %>
+    <%= link_to event.description, "/events/#{event.id}" %>
+  <% end %>
+  <br>
+<% end %>
+
 <% if @user == current_user %>
   <%= link_to 'Edit profile', edit_user_path(@user) %> |
 <% end %>
