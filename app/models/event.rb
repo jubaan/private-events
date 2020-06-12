@@ -8,6 +8,8 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('date >=?', Date.today) }
   scope :past, -> { where('date <?', Date.today) }
-  # scope :confirmed_appointments, -> { joins(:attendees).where('attendees.appointments.status = true') }
-  # scope :not_confirmed_appointments, -> { joins(:attendees).where('attendees.appointments.status = false') }
+
+  def self.appointments_by_status(event_id, status)
+    Appointment.where("event_id = #{event_id} and status = #{status}")
+  end
 end
