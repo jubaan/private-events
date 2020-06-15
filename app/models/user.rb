@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def self.appointments_by_status(attendee_id, status)
     Appointment.where("attendee_id = #{attendee_id} and status = #{status}")
   end
+
+  def invitable?(event_id)
+    Appointment.where("attendee_id = #{self.id} and event_id = #{event_id}").empty?
+  end
 end

@@ -47,10 +47,8 @@
     <%# TODO: Get rid of this loop %>
     <strong>Invite friends</strong>
     <br>
-    <% User.all.each do |attendee| %>
-      <% unless Appointment.exists?(@event, attendee) %>
-        <%= link_to "Invite #{attendee.username}", appointments_path({:attendee_id => attendee.id, :event_id => @event.id}), :method => 'post' %>
-      <% end %>
+    <% @event.invitable_users.each do |attendee| %>
+      <%= link_to "Invite #{attendee.username}", appointments_path({:attendee_id => attendee.id, :event_id => @event.id}), :method => 'post' %>
       <br>
     <% end %>
 
