@@ -8,4 +8,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def self.appointments_by_status(attendee_id, status)
+    Appointment.where("attendee_id = #{attendee_id} and status = #{status}")
+  end
 end

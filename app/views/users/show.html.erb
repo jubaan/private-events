@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<strong> Events Created </strong>
 <% @user.events.each do |event| %>
   <div>
     <%= event.location %>
@@ -11,19 +11,21 @@
   <% end %>
 </div>
 
-<% Event.all.each do |event| %>
-  <% if Appointment.confirmed?(event, @user) %>
-    <%= link_to event.description, "/event/#{event.id}" %>
+<div>
+  <strong> Confirmed Appointments </strong>
+  <% User.appointments_by_status(@user.id, true).each do |appointment| %>
+    <%= appointment.event.description  %>
+    <br>
   <% end %>
-  <br>
-<% end %>
+</div>
 
-<% Event.all.each do |event| %>
-  <% if Appointment.confirmed?(event, status = false, @user) %>
-    <%= link_to event.description, "/events/#{event.id}" %>
+<div>
+  <strong> Not Confirmed Appointments </strong>
+  <% User.appointments_by_status(@user.id, false).each do |appointment| %>
+    <%= appointment.event.description  %>
+    <br>
   <% end %>
-  <br>
-<% end %>
+</div>
 
 <% if @user == current_user %>
   <%= link_to 'Edit profile', edit_user_path(@user) %> |
