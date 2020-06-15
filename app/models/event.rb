@@ -16,7 +16,7 @@ class Event < ApplicationRecord
     Appointment.where("event_id = #{event_id} and status = #{status}")
   end
 
-  def self.invitable_users(event_id)
-    self.appointments.where()
+  def invitable_users
+    User.all - self.attendees
   end
 end

@@ -5,7 +5,7 @@
   <%= event.host.username %>
   <br>
   <%= link_to 'Show', event %>
-  <% unless event.appointments.find_by_attendee_id(current_user.id).nil? || event.appointments.find_by_attendee_id(current_user.id).status || event.host == current_user %>
+  <% unless !current_user.invitable?(event.id) || event.host == current_user %>
     <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' } %>
   <% end %>
   <% if event.host == current_user %>
