@@ -43,15 +43,9 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
-    respond_to do |format|
-      if @appointment.update(appointment_params)
-        format.html { redirect_to @appointment, notice: 'Appointment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @appointment }
-      else
-        format.html { render :edit }
-        format.json { render json: @appointment.errors, status: :unprocessable_entity }
-      end
-    end
+    @appointment = @appointment.update(appointment_params)
+
+    redirect_back(fallback_location: root_path)
   end
 
   # DELETE /appointments/1
@@ -72,6 +66,6 @@ class AppointmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def appointment_params
-      params.permit(:attendee_id, :event_id)
+      params.permit(:attendee_id, :event_id, :status)
     end
 end

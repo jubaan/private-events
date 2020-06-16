@@ -8,24 +8,32 @@
       <%= link_to 'Edit', edit_event_path(event) %>
       <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>
 
 <div>
   <strong> Confirmed Appointments </strong>
-  <% User.appointments_by_status(@user.id, true).each do |appointment| %>
-    <%= appointment.event.description  %>
-    <br>
-  <% end %>
+  <div>
+    <% @user.appointments_by_status('confirmed').each do |appointment| %>
+      <%= appointment.event.description  %>
+      <br>
+    <% end %>
+  </div>
 </div>
 
-<div>
-  <strong> Not Confirmed Appointments </strong>
-  <% User.appointments_by_status(@user.id, false).each do |appointment| %>
-    <%= appointment.event.description  %>
-    <br>
-  <% end %>
-</div>
+<% if @user == current_user %>
+  <div>
+    <strong> Not Confirmed Appointments </strong>
+    <div>
+      <% @user.appointments_by_status('invited').each do |appointment| %>
+        <%= link_to "I'm going", appointment_path({attendee_id: current_user.id, event_id: appointment.event.id, status: 'confirmed'}), method: :put, data: { confirm: 'Are you sure?' } %>
+
+        <%# <%= appointment.event.description  %1> %>
+        <br>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <% if @user == current_user %>
   <%= link_to 'Edit profile', edit_user_path(@user) %> |

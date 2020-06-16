@@ -17,6 +17,6 @@ class Event < ApplicationRecord
   end
 
   def invitable_users
-    User.all - self.attendees
+    User.all - [self.attendees, self.host]
   end
 end
