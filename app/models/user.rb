@@ -9,8 +9,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def self.appointments_by_status(attendee_id, status)
-    Appointment.where("attendee_id = #{attendee_id} and status = #{status}")
+  def appointments_by_status(status)
+    attendee_id = self.id
+    self.appointments.where('status =?', "#{status}")
   end
 
   def invitable?(event_id)
