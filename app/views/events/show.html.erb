@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Events</h1>
+<h1>
+  <%= @event.title %>
+</h1>
 
 <div>
   <strong> Hosted by
@@ -20,7 +22,7 @@
 
     <div>
       <strong>Confirmed</strong>
-      <% if Event.appointments_by_status(@event.id, true).empty? %>
+      <% if @event.appointments_by_status(true).empty? %>
         <div class="text-muted font-italic">Nobody has confirmed yet!</div>
       <% end %>
       <% Event.appointments_by_status(@event.id, true).each do |appointment| %>
