@@ -10,23 +10,28 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, autocomplete:"title", class:'form-control' %>
+  </div>
+
+  <div class="field form-group ">
     <%= f.label :date %><br />
-    <%= f.date_select :date, autocomplete:"date" %>
+    <%= f.date_select :date, autocomplete:"date", class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :location %><br />
-    <%= f.text_field :location, autocomplete: "location" %>
+    <%= f.text_field :location, autocomplete: "location", class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br />
-    <%= f.text_area :description, autocomplete: "location" %>
+    <%= f.text_area :description, autocomplete: "location", class:'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:'btn btn-primary'%>
   </div>
 
 <% end %>
