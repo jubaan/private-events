@@ -1,8 +1,13 @@
-# Members Only 
+# Private Events
 
-> Collaborative project. In these project we build a small application called Members Only.  
+> Collaborative project. We dive into ActiveRecord's association and created an
+even-brite kind of application called 'Private Events'
 
-This app allows users to create posts but only members can see the author of those posts.
+The objective was to gain a better understanding of Rails Associations:
+belongs_to, has_one, has_many, etc.
+
+The app allows signed users to create events, invite other users and accept
+invitations.
 
 ![screenshot](screenshot.png)
 
