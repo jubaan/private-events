@@ -9,15 +9,7 @@
       <span> | </span>
       <%= link_to 'Cancel Event', event, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-    <br>
-    <%= event.location %>
-    <br>
-    <%= event.date %>
-    <br>
-    <%= event.description %>
-    <br>
-    <%= event.host.username %>
-    <br>
+    <%= render "events/event_info", event: event%>
   </div>
 <% end %>
 
@@ -25,8 +17,8 @@
   <h3> Confirmed Appointments </h3>
   <div>
     <% @user.appointments_by_status('confirmed').each do |appointment| %>
-      <%= appointment.event.description  %>
-      <br>
+
+      <%= render "events/event_info", event: appointment.event%>
     <% end %>
   </div>
 </div>
@@ -36,6 +28,8 @@
     <h3> Not Confirmed Appointments </h3>
     <div>
       <% @user.appointments_by_status('invited').each do |appointment| %>
+
+        <%= render "events/event_info", event: appointment.event%>
         <%= link_to "I'm going", appointment_path({attendee_id: current_user.id, event_id: appointment.event.id, status: 'confirmed'}), method: :put, data: { confirm: 'Are you sure?' } %>
 
         <%# <%= appointment.event.description  %1> %>
@@ -46,6 +40,7 @@
 <% end %>
 
 <% if @user == current_user %>
+
   <%= link_to 'Edit profile', edit_user_path(@user) %> |
 <% end %>
 <%= link_to 'Back to events', root_path %>
