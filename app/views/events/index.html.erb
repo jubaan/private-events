@@ -1,15 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Events</h1>
+<h1 class="d-inline">Events</h1>
 
-<%= link_to 'New Event', new_event_path %>
+<%= link_to new_event_path do %>
+  <div class="btn btn-danger text-white float-right">
+    <i class="fa fa-plus mr-1"></i>
+    <span> Create Event</span>
+  </div>
+<% end %>
 
-<h2>Upcoming Events</h2>
+<h3>Upcoming Events</h3>
+
+<% if @upcoming_events.empty? %>
+  <div class="text-muted font-italic">No upcoming event!</div>
+<% end %>
+
 <% @upcoming_events.each do |event| %>
   <%= render "event_info", event: event%>
 <% end %>
 
-<h2>Past Events</h2>
+<h3>Past Events</h3>
+<% if @past_events.empty? %>
+  <div class="text-muted font-italic">No past events!</div>
+<% end %>
+
 <% @past_events.each do |event| %>
   <%= render "event_info", event: event%>
 <% end %>

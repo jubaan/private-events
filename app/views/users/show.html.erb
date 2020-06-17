@@ -15,10 +15,12 @@
 
 <div>
   <h3> Confirmed Appointments </h3>
+  <% if @user.confirmed_events.empty? %>
+    <div class="text-muted font-italic">Nobody has confirmed yet!</div>
+  <% end %>
   <div>
-    <% @user.appointments_by_status('confirmed').each do |appointment| %>
-
-      <%= render "events/event_info", event: appointment.event%>
+    <% @user.confirmed_events.each do |event| %>
+      <%= render "events/event_info", event: event%>
     <% end %>
   </div>
 </div>
@@ -26,13 +28,16 @@
 <% if @user == current_user %>
   <div>
     <h3> Not Confirmed Appointments </h3>
-    <div>
-      <% @user.appointments_by_status('invited').each do |appointment| %>
 
-        <%= render "events/event_info", event: appointment.event%>
+    <% if @user.invited_events.empty? %>
+      <div class="text-muted font-italic">Nobody is invited yet!</div>
+    <% end %>
+
+    <div>
+      <% @user.invited_events.each do |event| %>
+        <%= render "events/event_info", event: event%>
         <%= link_to "I'm going", appointment_path({attendee_id: current_user.id, event_id: appointment.event.id, status: 'confirmed'}), method: :put, data: { confirm: 'Are you sure?' } %>
 
-        <%# <%= appointment.event.description  %1> %>
         <br>
       <% end %>
     </div>
@@ -40,7 +45,7 @@
 <% end %>
 
 <% if @user == current_user %>
-
   <%= link_to 'Edit profile', edit_user_path(@user) %> |
 <% end %>
+
 <%= link_to 'Back to events', root_path %>
