@@ -15,10 +15,9 @@
     </div>
   </div>
 
-  <div class="card-body pb-1">
-    <p class="card-text"><%= event.description %></p>
-    <ul class="d-flex mb-1 flex-row list-unstyled m-0 small justify-content-end">
+  <div class="card-body pb-1 pt-1">
 
+    <ul class="d-flex flex-row mb-2 list-unstyled m-0 small">
       <li class="mr-3"><i class="fa fa-map-marker mr-1"></i>
         <span class="text-muted">
           <%= event.location %>
@@ -39,6 +38,8 @@
       </li>
 
     </ul>
+
+    <p class="card-text"><%= event.description %></p>
     <% unless !current_user.invitable?(event.id) || event.host == current_user %>
       <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
