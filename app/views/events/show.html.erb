@@ -22,34 +22,33 @@
 
     <div>
       <strong>Confirmed</strong>
-      <% if @event.appointments_by_status(true).empty? %>
+      <% if @event.confirmed_users.empty? %>
         <div class="text-muted font-italic">Nobody has confirmed yet!</div>
       <% end %>
-      <% Event.appointments_by_status(@event.id, true).each do |appointment| %>
+      <% @event.invited_users.each do |user| %>
         <div>
-          <%= link_to appointment.attendee.username, '/users/#{attendee.id}' %>
+          <%= link_to user.username, '/users/#{user.id}' %>
         </div>
       <% end %>
     </div>
 
     <div>
       <strong>Not Confirmed</strong>
-      <% if Event.appointments_by_status(@event.id, false).empty? %>
-        <div class="text-muted font-italic">Nobody has confirmed yet!</div>
+      <% if @event.invited_users.empty? %>
+        <div class="text-muted font-italic">Nobody is invited yet!</div>
       <% end %>
-      <% Event.appointments_by_status(@event.id, false).each do |appointment| %>
+      <% @event.invited_users.each do |user| %>
         <div>
-          <%= link_to appointment.attendee.username, '/users/#{attendee.id}' %>
+          <%= link_to user.username, '/users/#{user.id}' %>
         </div>
       <% end %>
     </div>
 
     <br>
 
-    <%# TODO: Get rid of this loop %>
     <strong>Invite friends</strong>
     <br>
-    <% @event.invitable_users.each do |attendee| %>
+    <% @event.invitable_users(current_user).each do |attendee| %>
       <%= link_to "Invite #{attendee.username}", appointments_path({:attendee_id => attendee.id, :event_id => @event.id}), :method => 'post' %>
       <br>
     <% end %>
