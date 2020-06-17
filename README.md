@@ -9,7 +9,9 @@ belongs_to, has_one, has_many, etc.
 The app allows signed users to create events, invite other users and accept
 invitations.
 
-![screenshot](screenshot.png)
+![index screenshot](screenshot.png)
+
+![Association model](associations_diagram.png)
 
 
 ## Built With
