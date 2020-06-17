@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Event < ApplicationRecord
   belongs_to :host, foreign_key: 'host_id', class_name: 'User'
   has_many :appointments, foreign_key: 'event_id', dependent: :destroy
@@ -19,10 +17,6 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where('date >=?', Date.today) }
   scope :past, -> { where('date <?', Date.today) }
-
-  def appointments_by_status(status)
-    Appointment.where("event_id = #{id} and status = #{status}")
-  end
 
   def invitable_users(current_user)
     User.all - [attendees, host, current_user]

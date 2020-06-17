@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EventsController < ApplicationController
   before_action :set_event, only: %i[show edit update destroy]
   before_action :authenticate_user!
@@ -70,6 +68,7 @@ class EventsController < ApplicationController
   def im_going
     p params[:event]
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
