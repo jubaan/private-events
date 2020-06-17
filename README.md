@@ -1,24 +1,30 @@
-# README
+# Members Only 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> Collaborative project. In these project we build a small application called Members Only.  
 
-Things you may want to cover:
+This app allows users to create posts but only members can see the author of those posts.
 
-* Ruby version
+![screenshot](screenshot.png)
 
-* System dependencies
 
-* Configuration
+## Built With
 
-* Database creation
+- Ruby on Rails v6.0.3.1
+- Devise Gem
+- Bootstrap
 
-* Database initialization
+## Authors
 
-* How to run the test suite
+👤 **Julio Añoveros**
 
-* Services (job queues, cache servers, search engines, etc.)
+- Github: [@jubaan](https://github.com/jubaan)
+- Twitter: [@AnoverosJulio](https://twitter.com/AnoverosJulio)
+- Linkedin: [linkedin](https://www.linkedin.com/in/julio-a%C3%B1overos-b987a8a/)
 
-* Deployment instructions
+👤Felipe dos Anjos
 
-* ...
+- Github: [@githubhandle](https://github.com/fc-anjos)
+- Linkedin: [linkedin](https://linkedin.com/in/fc-anjos)
+
+Give a ⭐️ if you like this project!
+
