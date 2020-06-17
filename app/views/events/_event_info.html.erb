@@ -1,21 +1,31 @@
 <div class="card mb-4">
-    <div class="rounded-top" style="background: linear-gradient(rgba(0,0,0,0.4) 0%, rgba(255,255,255,0) 100%), url('https://www.godominicanrepublic.com/wp-content/uploads/2019/11/coco-bongo-last-party-of-the-year.jpg') center; height:15vh">
-    <h3 class="mt-3 ml-3"><%= link_to event.title, event_path(event), class: "text text-white font-weight-bold " %></h3>
+  <div class="rounded-top" style="background: linear-gradient(rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%), url('https://www.godominicanrepublic.com/wp-content/uploads/2019/11/coco-bongo-last-party-of-the-year.jpg') center; height:15vh">
+    <div class="mt-2 ml-2 d-inline-block">
+      <h3 class="m-0"><%= link_to event.title, event_path(event), class: "text text-white font-weight-bold " %></h3>
+      <% if event.host == current_user %>
+        <%= link_to edit_event_path(event) do %>
+          <i class="fa fa-edit text-white m-1"></i>
+        <% end %>
+
+        <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-white m-1"></i>
+        <% end %>
+      </div>
+
     </div>
-  <div class="card-body">
-    <p class="card-text"><%= event.description %></p>
-    <ul class="d-flex flex-row justify-content-between list-unstyled">
-      <li><i class="fa fa-map-marker mr-1"></i><%= event.location %></li>
-      <li><i class="fa fa-calendar-o mr-1"></i><%= event.date %></li>
-      <li><i class="fa fa-user mr-1"></i><%= event.host.username %></li>
-    </ul>
-  <% unless !current_user.invitable?(event.id) || event.host == current_user %>
-    <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
-  <% end %>
-  <% if event.host == current_user %>
-    <%= link_to 'Edit', edit_event_path(event) %>
-    <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
+
+    <div class="card-body">
+      <p class="card-text"><%= event.description %></p>
+      <ul class="d-flex flex-row justify-content-between list-unstyled">
+        <li><i class="fa fa-map-marker mr-1"></i><%= event.location %></li>
+        <li><i class="fa fa-calendar-o mr-1"></i><%= event.date %></li>
+        <li><i class="fa fa-user mr-1"></i><%= event.host.username %></li>
+      </ul>
+      <% unless !current_user.invitable?(event.id) || event.host == current_user %>
+        <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+      <% end %>
+
+    <% end %>
   </div>
 
 </div>
