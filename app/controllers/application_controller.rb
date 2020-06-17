@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
@@ -9,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   def update_allowed_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :username, :email, :password) }
-    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :username, :email, :password, :current_password) }
+    devise_parameter_sanitizer.permit(:account_update) do |u|
+      u.permit(:name, :username, :email, :password, :current_password)
+    end
   end
 end
