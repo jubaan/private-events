@@ -1,18 +1,28 @@
-<strong> Events Created </strong>
+<h3> Events Created </h3>
 <% @user.events.each do |event| %>
   <div>
-    <%= event.location %>
-    <%= event.date %>
-    <%= event.description %>
+    <h4>
+      <%= link_to event.title, event_path(event) %>
+    </h4>
     <% if event.host == current_user %>
       <%= link_to 'Edit', edit_event_path(event) %>
-      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <span> | </span>
+      <%= link_to 'Cancel Event', event, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
+    <br>
+    <%= event.location %>
+    <br>
+    <%= event.date %>
+    <br>
+    <%= event.description %>
+    <br>
+    <%= event.host.username %>
+    <br>
   </div>
 <% end %>
 
 <div>
-  <strong> Confirmed Appointments </strong>
+  <h3> Confirmed Appointments </h3>
   <div>
     <% @user.appointments_by_status('confirmed').each do |appointment| %>
       <%= appointment.event.description  %>
@@ -23,7 +33,7 @@
 
 <% if @user == current_user %>
   <div>
-    <strong> Not Confirmed Appointments </strong>
+    <h3> Not Confirmed Appointments </h3>
     <div>
       <% @user.appointments_by_status('invited').each do |appointment| %>
         <%= link_to "I'm going", appointment_path({attendee_id: current_user.id, event_id: appointment.event.id, status: 'confirmed'}), method: :put, data: { confirm: 'Are you sure?' } %>
