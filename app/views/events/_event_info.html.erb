@@ -1,11 +1,14 @@
 <div>
-  <%= event.title %>
+  <%= link_to event.title, event_path(event) %>
+  <br>
   <%= event.location %>
+  <br>
   <%= event.date %>
+  <br>
   <%= event.description %>
+  <br>
   <%= event.host.username %>
   <br>
-  <%= link_to 'Show', event %>
   <% unless !current_user.invitable?(event.id) || event.host == current_user %>
     <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' } %>
   <% end %>
