@@ -1,5 +1,4 @@
 <div>
-
   <div>
     <%= render "events/event_info", event: @event%>
   </div>
@@ -18,9 +17,11 @@
 
   <div>
     <strong>Not Confirmed</strong>
+
     <% if @event.invited_users.empty? %>
       <div class="text-muted font-italic">Nobody is invited yet!</div>
     <% end %>
+
     <% @event.invited_users.each do |user| %>
       <div>
         <%= link_to user.username, '/users/#{user.id}' %>
@@ -32,6 +33,11 @@
 
   <strong>Invite friends</strong>
   <br>
+
+  <% if @event.invitable_users(current_user).empty? %>
+    <div class="text-muted font-italic">There are no friends to invite</div>
+  <% end %>
+
   <% @event.invitable_users(current_user).each do |attendee| %>
     <%= link_to "Invite #{attendee.username}", appointments_path({:attendee_id => attendee.id, :event_id => @event.id}), :method => 'post' %>
     <br>
@@ -42,7 +48,7 @@
   <br>
   <% if @event.host == current_user %>
     <%= link_to 'Edit', edit_event_path(@event) %> |
-    <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Cancel', @event, method: :delete, data: { confirm: 'Are you sure?' } %> |
   <% end %>
   <%= link_to 'Back', events_path %>
 </div>

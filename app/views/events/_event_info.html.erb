@@ -11,14 +11,13 @@
         <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' } do %>
           <i class="fa fa-trash text-white m-1"></i>
         <% end %>
-
       <% end %>
     </div>
   </div>
 
   <div class="card-body pb-1">
     <p class="card-text"><%= event.description %></p>
-    <ul class="d-flex flex-row list-unstyled m-0 small">
+    <ul class="d-flex mb-1 flex-row list-unstyled m-0 small justify-content-end">
 
       <li class="mr-3"><i class="fa fa-map-marker mr-1"></i>
         <span class="text-muted">
@@ -33,7 +32,7 @@
         </span>
       </li>
 
-      <li class="mr-3"><i class="fa fa-user mr-1"></i>
+      <li><i class="fa fa-user mr-1"></i>
         <span class="text-muted">
           <%= event.host.username %>
         </span>
@@ -45,5 +44,4 @@
 
     <% end %>
   </div>
-
 </div>
