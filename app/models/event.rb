@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   validates_uniqueness_of :title
   validates_length_of :description, within: 50..2000
-  validates_length_of :location, within: 50..255
+  validates_length_of :location, within: 10..255
   validates_presence_of :date, :title, :description, :location
 
   belongs_to :host, foreign_key: 'host_id', class_name: 'User'
@@ -24,6 +24,8 @@ class Event < ApplicationRecord
   scope :past, -> { where('date <?', Date.today) }
 
   def invitable_users(current_user)
-    User.all - [attendees, host, current_user]
+    User.find(User.all.ids - attendees.ids
+      .append(current_user.id)
+      .append(host.id))
   end
 end
