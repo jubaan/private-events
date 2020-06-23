@@ -10,14 +10,12 @@
   <div>
     <h3> Invitations </h3>
     <% if @user.invited_events.empty? %>
-      <div class="text-muted font-italic">Nobody is invited yet!</div>
+      <div class="text-muted font-italic">You've got no invitations yet!</div>
     <% end %>
 
     <div>
       <% @user.invited_events.each do |event| %>
         <%= render "events/event_info", event: event%>
-        <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' } %>
-
         <br>
       <% end %>
     </div>
@@ -27,9 +25,16 @@
 
 <div>
   <h3> Past Events </h3>
-  <% @user.past_participations.each do |event| %>
-    <%= event.date %>
+  <% if @user.past_participations.empty? %>
+    <div class="text-muted font-italic">No past events!</div>
   <% end %>
+
+  <div>
+    <% @user.past_participations.each do |event| %>
+      <%= render "events/event_info", event: event%>
+      <br>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to 'Back to events', root_path %>
