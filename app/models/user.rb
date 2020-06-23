@@ -14,19 +14,16 @@ class User < ApplicationRecord
     class_name: 'Event',
     source: :event
 
+  has_many :related_events,
+    through: :appointments,
+    class_name: 'Event',
+    source: :event
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
   def invitable?(event_id)
-    Appointment.where("attendee_id = #{id} and event_id = #{event_id}").empty?
-  end
-
-  def confirmed?(event_id)
-    Appointment.where("attendee_id = #{id} and event_id = #{event_id} and status = 'confirmed'").present?
-  end
-
-  def invited?(event_id)
-    Appointment.where("attendee_id = #{id} and event_id = #{event_id} and status = 'invited'").present?
+    (!confirmed_events.ids.include?(event_id) && invited_events.ids.include?(event_id)) && !related_events.ids.include?(event_id)
   end
 
   def past_participations
