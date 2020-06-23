@@ -1,6 +1,6 @@
 <div class="card mb-4">
 
-  <div class="rounded-top" style="background: linear-gradient(rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%), url('https://www.godominicanrepublic.com/wp-content/uploads/2019/11/coco-bongo-last-party-of-the-year.jpg') center; height:15vh">
+  <div class="rounded-top" style="background: linear-gradient(rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%), url('http://lorempixel.com/800/200/nightlife') center; height:15vh">
 
     <div class="mt-2 ml-2 d-inline-block">
       <h3 class="m-0"><%= link_to event.title, event_path(event), class: "text text-white font-weight-bold " %></h3>
@@ -40,12 +40,9 @@
     </ul>
 
     <p class="card-text"><%= event.description %></p>
-    <% if current_user.invitable?(event.id) && event.host != current_user && @user != current_user %>
+    <% if (event.host != current_user) && (user == current_user) && (user.invited?(event.id) && !user.confirmed?(event.id) || user.invitable?(event.id)) %>
       <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
 
     <% end %>
-
-    <%= current_user.id %>
-
   </div>
 </div>

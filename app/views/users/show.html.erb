@@ -1,7 +1,7 @@
 <h3> Upcoming Events </h3>
 <% @upcoming_events.each do |event| %>
   <div>
-    <%= render "events/event_info", event: event%>
+    <%= render "events/event_info", event: event, user: @user%>
   </div>
 <% end %>
 
@@ -15,7 +15,7 @@
 
     <div>
       <% @user.invited_events.each do |event| %>
-        <%= render "events/event_info", event: event%>
+        <%= render "events/event_info", event: event, user: @user%>
         <br>
       <% end %>
     </div>
@@ -31,7 +31,7 @@
 
   <div>
     <% @user.past_participations.each do |event| %>
-      <%= render "events/event_info", event: event%>
+      <%= render "events/event_info", event: event, user: @user%>
       <br>
     <% end %>
   </div>
