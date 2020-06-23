@@ -1,34 +1,14 @@
-<h3> Events Created </h3>
-<% @user.events.each do |event| %>
+<h3> Upcoming Events </h3>
+<% @upcoming_events.each do |event| %>
   <div>
-    <h4>
-      <%= link_to event.title, event_path(event) %>
-    </h4>
-    <% if event.host == current_user %>
-      <%= link_to 'Edit', edit_event_path(event) %>
-      <span> | </span>
-      <%= link_to 'Cancel Event', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %>
     <%= render "events/event_info", event: event%>
   </div>
 <% end %>
 
-<div>
-  <h3> Confirmed Appointments </h3>
-  <% if @user.confirmed_events.empty? %>
-    <div class="text-muted font-italic">Nobody has confirmed yet!</div>
-  <% end %>
-  <div>
-    <% @user.confirmed_events.each do |event| %>
-      <%= render "events/event_info", event: event%>
-    <% end %>
-  </div>
-</div>
-
 <% if @user == current_user %>
-  <div>
-    <h3> Not Confirmed Appointments </h3>
 
+  <div>
+    <h3> Invitations </h3>
     <% if @user.invited_events.empty? %>
       <div class="text-muted font-italic">Nobody is invited yet!</div>
     <% end %>
@@ -36,16 +16,18 @@
     <div>
       <% @user.invited_events.each do |event| %>
         <%= render "events/event_info", event: event%>
-        <%= link_to "I'm going", appointment_path({attendee_id: current_user.id, event_id: appointment.event.id, status: 'confirmed'}), method: :put, data: { confirm: 'Are you sure?' } %>
+        <%= link_to "I'm going", appointments_path({attendee_id: current_user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' } %>
 
         <br>
       <% end %>
     </div>
   </div>
+
 <% end %>
 
-<% if @user == current_user %>
-  <%= link_to 'Edit profile', edit_user_path(@user) %> |
-<% end %>
+<div>
+  <h3> Past Events </h3>
+  <%= @user.appointments.past_accepted %>
+</div>
 
 <%= link_to 'Back to events', root_path %>

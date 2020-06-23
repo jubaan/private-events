@@ -6,7 +6,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show; end
+  def show
+    @upcoming_events = @user.events.upcoming
+    @past_events = @user.appointments.where('status = confirmed AND date')
+  end
 
   def new
     @user = User.new

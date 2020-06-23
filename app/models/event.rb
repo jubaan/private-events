@@ -9,16 +9,16 @@ class Event < ApplicationRecord
   has_many :attendees, through: :appointments
 
   has_many :confirmed_users,
-    -> { where('status =?', 'confirmed') },
-    through: :appointments,
-    class_name: 'User',
-    source: :attendee
+           -> { where('status =?', 'confirmed') },
+           through: :appointments,
+           class_name: 'User',
+           source: :attendee
 
   has_many :invited_users,
-    -> { where('status =?', 'invited') },
-    through: :appointments,
-    class_name: 'User',
-    source: :attendee
+           -> { where('status =?', 'invited') },
+           through: :appointments,
+           class_name: 'User',
+           source: :attendee
 
   scope :upcoming, -> { where('date >=?', Date.today) }
   scope :past, -> { where('date <?', Date.today) }
