@@ -23,10 +23,12 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   def invitable?(event_id)
-    (!confirmed_events.ids.include?(event_id) && invited_events.ids.include?(event_id)) && !related_events.ids.include?(event_id)
+    (!confirmed_events.ids.include?(event_id) &&
+    invited_events.ids.include?(event_id)) ||
+      !related_events.ids.include?(event_id)
   end
 
   def past_participations
-    invited_events.past + events.past
+    (invited_events.past + events.past).to_set
   end
 end
