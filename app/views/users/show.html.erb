@@ -27,7 +27,9 @@
 
 <div>
   <h3> Past Events </h3>
-  <%= @user.appointments.past_accepted %>
+  <% @user.past_participations.each do |event| %>
+    <%= event.date %>
+  <% end %>
 </div>
 
 <%= link_to 'Back to events', root_path %>
