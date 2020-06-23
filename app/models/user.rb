@@ -14,7 +14,6 @@ class User < ApplicationRecord
            class_name: 'Event',
            source: :event
 
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
