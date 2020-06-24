@@ -95,6 +95,8 @@ GEM
     erubi (1.9.0)
     eventmachine (1.2.7)
     execjs (2.7.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -274,6 +276,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise (~> 4.7, >= 4.7.1)
+  faker (~> 2.13)
   graphviz (~> 1.1)
   guard (~> 2.16, >= 2.16.2)
   guard-livereload (~> 2.5, >= 2.5.2)
