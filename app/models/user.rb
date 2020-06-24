@@ -3,32 +3,47 @@ class User < ApplicationRecord
   has_many :appointments, foreign_key: 'attendee_id'
 
   has_many :confirmed_events,
-           -> { where('status =?', 'confirmed') },
-           through: :appointments,
-           class_name: 'Event',
-           source: :event
+    -> { where('status =?', 'confirmed') },
+    through: :appointments,
+    class_name: 'Event',
+    source: :event
 
   has_many :invited_events,
-           -> { where('status =?', 'invited') },
-           through: :appointments,
-           class_name: 'Event',
-           source: :event
+    -> { where('status =?', 'invited') },
+    through: :appointments,
+    class_name: 'Event',
+    source: :event
 
   has_many :related_events,
-           through: :appointments,
-           class_name: 'Event',
-           source: :event
+    through: :appointments,
+    class_name: 'Event',
+    source: :event
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
-  def invitable?(event_id)
+  def host?(event_id)
+    events.ids.include?(event_id)
+  end
+
+  def current_user?(current_user)
+    current_user == self
+  end
+
+  def invited?(event_id)
     (!confirmed_events.ids.include?(event_id) &&
-    invited_events.ids.include?(event_id)) ||
-      !related_events.ids.include?(event_id)
+     invited_events.ids.include?(event_id))
+  end
+
+  def show_im_going_btn(event_id, current_user)
+    !self.host?(event_id) && self.current_user?(current_user) && self.invited?(event_id)
+  end
+
+  def related?(event_id)
+    related_events.ids.include?(event_id) || events.ids.include?(event_id)
   end
 
   def past_participations
-    (invited_events.past + events.past).to_set
+    (confirmed_events.past + events.past).to_set
   end
 end
