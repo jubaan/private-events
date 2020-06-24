@@ -2,22 +2,22 @@ require 'rails_helper'
 require 'date'
 # require 'pry-byebug'
 
-
 RSpec.describe Event, type: :model do
-  let (:user) { User.create(
-    {
-      name: 'Julio',
-      username: 'Julio',
-      email: 'julio@outlook.com',
-      password: 123456,
-      password_confirmation: 123456
-    }
-  )
-  }
+  let (:user) do
+    User.create(
+      {
+        name: 'Julio',
+        username: 'Julio',
+        email: 'julio@outlook.com',
+        password: 123_456,
+        password_confirmation: 123_456
+      }
+    )
+  end
 
-  $stderr.puts User.all
+  warn User.all
 
-  event = Event.new()
+  event = Event.new
   # let (:event) { event = Event.new() }
 
   # describe '::new' do
@@ -36,10 +36,10 @@ RSpec.describe Event, type: :model do
   # describe '::save' do
   it '::save' do
     event.host_id = 1
-    event.title= 'party'
-    event.date= Date.today
-    event.location= 'the national park'
-    event.description= 'this is the description of the event'
+    event.title = 'party'
+    event.date = Date.today
+    event.location = 'the national park'
+    event.description = 'this is the description of the event'
 
     event.save
 
