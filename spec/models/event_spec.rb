@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'date'
 
 RSpec.describe Event, type: :model do
+
   context 'new event test' do
     let(:event) { build :event }
 
@@ -19,7 +20,7 @@ RSpec.describe Event, type: :model do
     end
 
     context 'valid event' do
-      let(:user) { create :user }
+      let(:user) { create :user, :with_username }
       let(:event) { build(:event, host_id: user.id) }
       it 'generates an event' do
         expect(event).to be_valid
@@ -28,7 +29,7 @@ RSpec.describe Event, type: :model do
   end
 
   context 'association test' do
-    let(:user) { create :user }
+    let(:user) { create :user, :with_username  }
     let(:event) { build(:event, host_id: user.id) }
 
     it 'event should belong to user' do
@@ -37,7 +38,7 @@ RSpec.describe Event, type: :model do
   end
 
   context 'invitable_users' do
-    let(:created_users) { created_users = create_list(:user, 3) }
+    let(:created_users) { created_users = create_list(:user, 3, :with_username) }
     let(:event) { create(:event, host_id: created_users.first.id) }
     it '' do
       expect(event)

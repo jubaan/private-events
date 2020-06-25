@@ -10,8 +10,8 @@ RSpec.describe Appointment, type: :model do
   end
 
   describe 'new event test' do
-      let(:host) { create :user }
-      let(:attendee) { create :user }
+      let(:host) { create :user, :with_username }
+      let(:attendee) { create :user, :with_username}
       let(:event) { create(:event, host_id: host.id) }
 
     context 'valid appointment' do
