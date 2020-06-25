@@ -1,32 +1,47 @@
 require 'rails_helper'
+require 'date'
 
 RSpec.describe Event, type: :model do
+  context 'new event test' do
+    let(:event) { build :event }
 
-  @event = new :event, :complete
-
-  # describe '::new' do
     it 'generates an event' do
-      expect(@event).to be_a(Event)
+      expect(event).to be_an(Event)
     end
-  # end
+  end
 
-  # describe '::new' do
-    it 'generates an invalid event' do
-      expect(event).not_to be_valid
+  describe 'validation test' do
+    context 'invalid event' do
+      let(:event) { build :event }
+      it 'should be invalid' do
+        expect(event).not_to be_valid
+      end
     end
-  # end
 
-#   describe '::save' do
-#     it '::save' do
-#       user = create :user
-#       event.host_id = user.id
-#       event.title = 'party'
-#       event.date = Date.today
-#       event.location = 'the national park'
-#       event.description = 'this is the description of the event'
+    context 'valid event' do
+      let(:user) { create :user }
+      let(:event) { build(:event, host_id: user.id) }
+      it 'generates an event' do
+        expect(event).to be_valid
+      end
+    end
+  end
 
-#       expect(event).to be_valid
-#       event.save
-    # end
-  # end
+  context 'association test' do
+    let(:user) { create :user }
+    let(:event) { build(:event, host_id: user.id) }
+
+    it 'event should belong to user' do
+      expect(event.host).to eq(user)
+    end
+  end
+
+  context 'invitable_users' do
+    let(:created_users) { created_users = create_list(:user, 3) }
+    let(:event) { create(:event, host_id: created_users.first) }
+    it '' do
+      invitable = event.invitable_users(2)
+      expect(event)
+    end
+  end
 end
