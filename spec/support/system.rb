@@ -4,4 +4,4 @@ RSpec.configure do |config|
   end
 end
 
-require "capybara-screenshot/rspec"
+require 'capybara-screenshot/rspec'
