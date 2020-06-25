@@ -31,17 +31,12 @@ RSpec.describe Event, type: :model do
   context 'association test' do
     let(:user) { create :user, :with_username  }
     let(:event) { build(:event, host_id: user.id) }
-
     it 'event should belong to user' do
       expect(event.host).to eq(user)
     end
   end
 
   context 'invitable_users' do
-    let(:created_users) { created_users = create_list(:user, 3, :with_username) }
-    let(:event) { create(:event, host_id: created_users.first.id) }
-    it '' do
-      expect(event)
-    end
+      pending "add some examples to (or delete) #{__FILE__}"
   end
 end

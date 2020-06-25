@@ -23,5 +23,14 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
     end
+
+    context 'association test' do
+      let(:user) { create :user, :with_username  }
+      let(:event) { create(:event, host_id: user.id) }
+      it 'event should belong to user' do
+        expect(user.events).to include(event)
+      end
+    end
+
   end
 end
