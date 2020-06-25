@@ -2,17 +2,6 @@ require 'rails_helper'
 require 'date'
 
 RSpec.describe Event, type: :model do
-  let(:user) do
-    User.create(
-      {
-        name: 'Julio',
-        username: 'Julio',
-        email: 'julio@outlook.com',
-        password: 123_456,
-        password_confirmation: 123_456
-      }
-    )
-  end
 
   let(:event) do
     Event.new
@@ -20,7 +9,7 @@ RSpec.describe Event, type: :model do
 
   describe '::new' do
     it 'generates an event' do
-      expect(user).to be_valid
+      expect(event).to be_a(Event)
     end
   end
 
@@ -32,6 +21,7 @@ RSpec.describe Event, type: :model do
 
   describe '::save' do
     it '::save' do
+      user = create :user
       event.host_id = user.id
       event.title = 'party'
       event.date = Date.today
