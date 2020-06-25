@@ -38,9 +38,8 @@ RSpec.describe Event, type: :model do
 
   context 'invitable_users' do
     let(:created_users) { created_users = create_list(:user, 3) }
-    let(:event) { create(:event, host_id: created_users.first) }
+    let(:event) { create(:event, host_id: created_users.first.id) }
     it '' do
-      invitable = event.invitable_users(2)
       expect(event)
     end
   end
