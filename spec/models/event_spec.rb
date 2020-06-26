@@ -2,7 +2,6 @@ require 'rails_helper'
 require 'date'
 
 RSpec.describe Event, type: :model do
-
   context 'new event test' do
     let(:event) { build :event }
 
@@ -29,7 +28,7 @@ RSpec.describe Event, type: :model do
   end
 
   context 'association test' do
-    let(:user) { create :user, :with_username  }
+    let(:user) { create :user, :with_username }
     let(:event) { build(:event, host_id: user.id) }
     it 'event should belong to user' do
       expect(event.host).to eq(user)
@@ -37,6 +36,6 @@ RSpec.describe Event, type: :model do
   end
 
   context 'invitable_users' do
-      pending "add some examples to (or delete) #{__FILE__}"
+    pending "add some examples to (or delete) #{__FILE__}"
   end
 end

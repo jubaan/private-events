@@ -10,9 +10,9 @@ RSpec.describe Appointment, type: :model do
   end
 
   describe 'new event test' do
-      let(:host) { create :user, :with_username }
-      let(:attendee) { create :user, :with_username}
-      let(:event) { create(:event, host_id: host.id) }
+    let(:host) { create :user, :with_username }
+    let(:attendee) { create :user, :with_username }
+    let(:event) { create(:event, host_id: host.id) }
 
     context 'valid appointment' do
       let(:appointment) { create(:appointment, attendee_id: attendee.id, event_id: event.id) }
@@ -28,7 +28,6 @@ RSpec.describe Appointment, type: :model do
       it 'should be invalid without attendee' do
         expect(appointment).not_to be_valid
       end
-
     end
 
     context 'invalid appointment without event' do
@@ -40,5 +39,3 @@ RSpec.describe Appointment, type: :model do
     end
   end
 end
-
-
