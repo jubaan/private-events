@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :with_host do
       host_id { Faker::Number.between }
     end
+
+    trait :past_events do
+      date { Faker::Date.between(from: Date.today - 10, to: Date.today - 5) }
+    end
   end
 end
