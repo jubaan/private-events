@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def invited?(event_id)
-    (!confirmed_event.ids.include?(event_id) &&
+    (!confirmed_events.ids.include?(event_id) &&
      invited_events.ids.include?(event_id))
   end
 

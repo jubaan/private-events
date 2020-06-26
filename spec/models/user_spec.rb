@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
     let (:appointment) { create(:appointment, :status_invited, attendee_id: attendee.id, event_id: event.id) }
     it 'should return true if the user is invited to the event' do
       # byebug
-      expect(appointments.attendee && attendee.invited?(event.id)).to be_truthy
+      expect((appointment.attendee).invited?(event.id)).to be_truthy
     end
   end
 end
