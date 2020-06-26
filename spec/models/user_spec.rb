@@ -77,26 +77,16 @@ RSpec.describe User, type: :model do
   end
 
   describe '#past_participations' do
-    let (:this_user) { create :user, :with_username }
-    let (:other_user) { create :user, :with_username }
-    let (:hosted_events) { hosted_events = create_list(:event, 2, :past_events, host_id: this_user.id) }
-    let (:attended_events) { attended_events = create_list(:event, 2, :past_events, host_id: other_user.id) }
-    let (:appointment1) { create(:appointment, :status_confirmed, attendee_id: this_user.id, event_id: attended_events[0].id) }
-    let (:appointment2) { create(:appointment, :status_confirmed, attendee_id: this_user.id, event_id: attended_events[1].id) }
-    before(:all) do
-      Appointment.build({ status: 'confirmed', attendee_id: })
-    end
+    let(:this_user) { create :user, :with_username }
+    let(:other_user) { create :user, :with_username }
+    let(:hosted_events) { hosted_events = create_list(:event, 2, :past_events, host_id: this_user.id) }
+    let(:attended_events) { attended_events = create_list(:event, 2, :past_events, host_id: other_user.id) }
+    let!(:appointment1) { create(:appointment, :status_confirmed, attendee_id: this_user.id, event_id: attended_events[0].id) }
+    let!(:appointment2) { create(:appointment, :status_confirmed, attendee_id: this_user.id, event_id: attended_events[1].id) }
 
     it 'should return true if the user has relation with an especifif events' do
-
-      # byebug
-      hosted = hosted_events
-      attended = attended_events
-      appointments = [appointment1, appointment2]
-
-      past_participation = hosted + attended + appointments
-
-      expect(this_user.past_participations).to contain_exactly(past_participation)
+      past_participation = (hosted_events + attended_events).to_set
+      expect(this_user.past_participations).to eql(past_participation)
     end
   end
 end
