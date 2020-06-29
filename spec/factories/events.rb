@@ -1,4 +1,4 @@
-require "date"
+require 'date'
 
 FactoryBot.define do
   factory :event, class: Event do
