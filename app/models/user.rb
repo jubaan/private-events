@@ -1,24 +1,24 @@
 class User < ApplicationRecord
-  has_many :events, foreign_key: 'host_id', class_name: 'Event'
-  has_many :appointments, foreign_key: 'attendee_id'
+  has_many :events, foreign_key: "host_id", class_name: "Event"
+  has_many :appointments, foreign_key: "attendee_id"
   validates_presence_of :username, :email, :name
   validates_confirmation_of :password
 
   has_many :confirmed_events,
-           -> { where('status =?', 'confirmed') },
+           -> { where("status =?", "confirmed") },
            through: :appointments,
-           class_name: 'Event',
+           class_name: "Event",
            source: :event
 
   has_many :invited_events,
-           -> { where('status =?', 'invited') },
+           -> { where("status =?", "invited") },
            through: :appointments,
-           class_name: 'Event',
+           class_name: "Event",
            source: :event
 
   has_many :related_events,
            through: :appointments,
-           class_name: 'Event',
+           class_name: "Event",
            source: :event
 
   devise :database_authenticatable, :registerable,
