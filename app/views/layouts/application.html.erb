@@ -15,7 +15,7 @@
       <ul class="nav navbar-nav ml-auto flex-row">
         <li class='nav-item'>
           <% if user_signed_in? %>
-            <%= link_to('log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary text-decoration-none mr-1")  %>
+            <%= link_to('log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary text-decoration-none mr-1", id:"log-out")  %>
           <% end %>
         </li>
         <li class='nav-item'>
@@ -33,7 +33,7 @@
           <li class='nav-item'>
             <button class="btn btn-secondary ml-1">
               <i class="fa fa-user-circle-o text-white mr-1"></i>
-              <%= link_to(current_user.username, current_user, class: "text-white text-decoration-none")  %>
+              <%= link_to(current_user.username, current_user, class: "text-white text-decoration-none", id:"user-profile")  %>
             </button>
 
           </li>

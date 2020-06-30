@@ -35,7 +35,4 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  context 'invitable_users' do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
 end
