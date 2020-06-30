@@ -42,9 +42,9 @@
 
     <p class="card-text"><%= event.description %></p>
     <% if user.show_im_going_btn(event.id, current_user) %>
-      <%= link_to "I'm going", appointments_path({attendee_id: user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+      <%= link_to "I'm going", appointments_path({attendee_id: user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary im-going" %>
     <% elsif !user.related?(event.id) %>
-      <%= link_to "Invite myself", appointments_path({attendee_id: current_user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+      <%= link_to "Invite myself", appointments_path({attendee_id: current_user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary", class: "invite-myself" %>
     <% end %>
   </div>
 </div>

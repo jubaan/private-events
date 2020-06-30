@@ -34,5 +34,4 @@ RSpec.describe Event, type: :model do
       expect(event.host).to eq(user)
     end
   end
-
 end
