@@ -10,9 +10,9 @@ require 'faker'
 10.times do
   User.create(
     {
-      name: Faker::Name.name,
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
+      name: Faker::Name.unique.name,
+      username: Faker::Internet.unique.username,
+      email: Faker::Internet.unique.email,
       password: '123456',
       password_confirmation: '123456'
     }
@@ -23,10 +23,10 @@ end
   event = Event.create(
     {
       host_id: Faker::Number.between(from: 1, to: User.all.length),
-      title: Faker::Movie.title,
+      title: Faker::Movie.unique.title,
       date: Faker::Date.between(from: '2020-01-01', to: '2021-12-31'),
       location: Faker::TvShows::TwinPeaks.location,
-      location: Faker::TvShows::TwinPeaks.quote
+      description: Faker::TvShows::TwinPeaks.quote
     }
   )
 
