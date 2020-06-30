@@ -5,7 +5,6 @@ RSpec.describe 'Requests', type: :request do
     @user = attributes_for(:user)
   end
 
-
   context 'with valid attributes for user' do
     it 'saves the new user in the database' do
       expect do
