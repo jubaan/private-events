@@ -1,0 +1,40 @@
+<h3> Upcoming Events </h3>
+<% @upcoming_events.each do |event| %>
+  <div>
+    <%= render "events/event_info", event: event, user: @user%>
+  </div>
+<% end %>
+
+<% if @user == current_user %>
+
+  <div>
+    <h3> Invitations </h3>
+    <% if @user.invited_events.empty? %>
+      <div class="text-muted font-italic">You've got no invitations yet!</div>
+    <% end %>
+
+    <div>
+      <% @user.invited_events.each do |event| %>
+        <%= render "events/event_info", event: event, user: @user%>
+        <br>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>
+
+<div>
+  <h3> Past Events </h3>
+  <% if @user.past_participations.empty? %>
+    <div class="text-muted font-italic">No past events!</div>
+  <% end %>
+
+  <div>
+    <% @user.past_participations.each do |event| %>
+      <%= render "events/event_info", event: event, user: @user%>
+      <br>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'Back to events', root_path %>

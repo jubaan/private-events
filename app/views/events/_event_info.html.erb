@@ -1,0 +1,50 @@
+<div class="card mb-4" id="event-<%= event.id %>">
+
+  <div class="rounded-top" style="background: linear-gradient(rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%), url('http://lorempixel.com/800/200/nightlife') center; height:15vh">
+
+    <div class="mt-2 ml-2 d-inline-block">
+      <h3 class="m-0"><%= link_to event.title, event_path(event), class: "text text-white font-weight-bold " %></h3>
+      <% if event.host == current_user %>
+        <%= link_to edit_event_path(event) do %>
+          <i class="fa fa-edit text-white m-1"></i>
+        <% end %>
+        <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <i class="fa fa-trash text-white m-1"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card-body pb-1 pt-1">
+
+    <ul class="d-flex flex-row mb-2 list-unstyled m-0 small">
+      <li class="mr-3"><i class="fa fa-map-marker mr-1"></i>
+        <span class="text-muted">
+          <%= event.location %>
+        </span>
+      </li>
+
+      <li class="mr-3">
+        <i class="fa fa-calendar-o mr-1"></i>
+        <span class="text-muted">
+          <%= event.date %>
+        </span>
+      </li>
+
+      <li><i class="fa fa-user mr-1"></i>
+        <span class="text-muted">
+          <%= event.host.username %>
+        </span>
+      </li>
+
+    </ul>
+
+
+    <p class="card-text"><%= event.description %></p>
+    <% if user.show_im_going_btn(event.id, current_user) %>
+      <%= link_to "I'm going", appointments_path({attendee_id: user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary im-going" %>
+    <% elsif !user.related?(event.id) %>
+      <%= link_to "Invite myself", appointments_path({attendee_id: current_user.id, event_id: event.id, status: 'confirmed'}), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-primary", class: "invite-myself" %>
+    <% end %>
+  </div>
+</div>
